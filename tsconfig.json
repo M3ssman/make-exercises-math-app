@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "target": "es6"
+    },
+    "files": [
+        "./app.ts",
+        "./pdf-router.ts",
+        "./tests/app_test.ts"
+    ]
+}

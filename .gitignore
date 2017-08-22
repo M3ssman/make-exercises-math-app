@@ -1,0 +1,12 @@
+# no generated stuff
+**/*.js.map
+**/*.js
+
+# no modules
+node_modules
+
+# no vscode config
+.vscode
+
+# no debug stuff
+npm-debug.log
