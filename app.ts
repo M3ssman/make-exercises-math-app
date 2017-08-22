@@ -51,7 +51,7 @@ if (expApp === null) {
 console.log('Try starting app ... ');
 console.log(process.env);
 
-const port = normalizePort(process.env.OPENSHIFT_NODE4_PORT || 3000);
+const port = normalizePort(process.env.OPENSHIFT_NODEJS_PORT || 8080);
 expApp.set('port', port);
 export const server = http.createServer(expApp);
 server.listen(port);
