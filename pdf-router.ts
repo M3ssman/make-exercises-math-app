@@ -15,6 +15,7 @@ export class PDFRouter {
         console.log('call make request exercises ... ' + req.query);
         const parameters = req.query;
         const types = determineExerciseTypes(parameters.types);
+        const label = parameters.label || 'Mathematik :: Sienna Metzner, 3c';
         const exerciseTypes = types || [defaultAdd];
         
 
@@ -25,7 +26,7 @@ export class PDFRouter {
         console.log('set datum: ' + datum.toString());
 
         let a = 1;
-        doc.text('Mathematics, Sienna Metzner, 3c');
+        doc.text(label);
         doc.text('(1) ' + datum);
         let y = 150;
         let x = 40;
