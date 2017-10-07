@@ -12,7 +12,7 @@ export class MakeRouter {
     router: express.Router;
 
     get(req: express.Request, res: express.Response, next: express.NextFunction): void {
-        console.log('call make request exercises ... ' + req.query);
+        console.log('get query: ' + JSON.stringify(req.query));
         const parameters = req.query;
         const types = determineExerciseTypes(parameters.types);
         const label = parameters.label || 'Mathematik :: Sienna Metzner, 3c';
@@ -23,7 +23,11 @@ export class MakeRouter {
         doc.font('Courier-Bold', 'Courier', 14);
         moment.locale('de');
         const datum = moment(new Date()).format('LL');
-        console.log('set datum: ' + datum.toString());
+
+        const metaData = {
+            datum: datum, label: label
+        };
+        console.log('metadata: ' + JSON.stringify(metaData));
 
         let a = 1;
         doc.text(label);
@@ -31,10 +35,9 @@ export class MakeRouter {
         let y = 150;
         let x = 40;
         const ePromise = makeSet(exerciseTypes);
-        console.log('requested promise of exercises[][] : ' + ePromise);
         ePromise.then(
             op => {
-                console.log('resolve promise of exercises[][]: ' + op.length);
+                console.log('resolved exercises: ' + JSON.stringify(op));
                 const exc: ExerciseMathImpl[][] = op;
                 for (let i = 0; i < exc.length; i++) {
                     let row = a + ' ) ';
@@ -42,7 +45,6 @@ export class MakeRouter {
                     x += 40;
                     for (let j = 0; j < exc[i].length; j++) {
                         const excR: string = exc[i][j].get()[0];
-                        console.log('exercise : ' + excR);
                         doc.text(excR, x, y);
                         y += 40;
                     }
@@ -53,8 +55,8 @@ export class MakeRouter {
                 doc.pipe(res);
                 doc.end();
             },
-            reject => {
-                console.log("reject: " + reject);
+            err => {
+                console.log('rejected promise : ' + err);
             }
         );
     }
