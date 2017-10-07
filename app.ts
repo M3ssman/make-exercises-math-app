@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
-import { PDFRouter } from './pdf-router';
+import * as makeRoute from './make-router';
 debug('ts-express:server');
 
 // Creates and configures an ExpressJS web server.
@@ -36,8 +36,7 @@ class MyApp {
         });
 
         this.express.use('/', router);
-        const pr: PDFRouter = new PDFRouter()
-        this.express.use('/make', pr.router);
+        this.express.use('/make', makeRoute.default);
     }
 }
 

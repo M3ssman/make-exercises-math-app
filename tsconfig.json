@@ -7,7 +7,7 @@
     },
     "files": [
         "./app.ts",
-        "./pdf-router.ts",
+        "./make-router.ts",
         "./tests/app_test.ts"
     ]
 }

@@ -3,11 +3,11 @@ import * as  PDFDocument from 'pdfkit';
 import * as moment from 'moment';
 
 import { makeSet, defaultAdd } from 'make-exercises-math';
-import * as makeSetType from 'make-exercises-math';
-import { ExerciseMathImpl, BinaryExpressionImpl, BinaryExpressionRender } from 'make-exercises-math';
+import * as extype from 'make-exercises-math';
+import { ExerciseMathImpl, ExpressionImpl, ExpressionRender } from 'make-exercises-math';
 
 
-export class PDFRouter {
+export class MakeRouter {
 
     router: express.Router;
 
@@ -17,7 +17,7 @@ export class PDFRouter {
         const types = determineExerciseTypes(parameters.types);
         const label = parameters.label || 'Mathematik :: Sienna Metzner, 3c';
         const exerciseTypes = types || [defaultAdd];
-        
+
 
         let doc = new PDFDocument({ 'size': [600, 840] });
         doc.font('Courier-Bold', 'Courier', 14);
@@ -60,7 +60,7 @@ export class PDFRouter {
     }
 
     /**
-     * Initialize the PDFRouter
+     * Initialize the Router
      */
     constructor() {
         this.router = express.Router();
@@ -72,18 +72,18 @@ export class PDFRouter {
     }
 }
 
-function determineExerciseTypes(types:string): any[] | undefined {
-    if(types) {
+function determineExerciseTypes(types: string): any[] | undefined {
+    if (types) {
         let t = [];
         const typesArray = types.split(',');
-        for(let i=0; i<typesArray.length; i++) {
-            if(makeSetType[typesArray[i]]) {
-                t.push(makeSetType[typesArray[i]]);
+        for (let i = 0; i < typesArray.length; i++) {
+            if (extype[typesArray[i]] !== undefined) {
+                t.push(extype[typesArray[i]]);
             }
         }
         return t;
     }
 }
 
-const pdfRoutes = new PDFRouter();
-export default pdfRoutes.router;
+const makeRoute = new MakeRouter();
+export default makeRoute.router;
