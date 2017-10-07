@@ -11,7 +11,7 @@ npm install
 In Root Folder, execute tests:
 
 ```
-npm start
+npm test
 ```
 
 ## Start
