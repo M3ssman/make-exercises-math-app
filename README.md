@@ -12,7 +12,7 @@ Add the types-Parameter like this, to get a 3-column Worksheet:
 ExerciseTypes are separated by comma and must be contained in the listed ExercisesTypes above. 
 
 The page has a label on top. To change it's text, add the label parameter in your Query like this:
-[http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make?types=multN10N10&label=my%20custom%20label](http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make?types=multN10N10,divN100&label=my%20custom%20label)
+[http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make?types=multN10N10&label=my%20custom%20label](http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make?types=multN10N10&label=my%20custom%20label)
 
 ## Installation 
 Clone Repository, checkout current master, run 
