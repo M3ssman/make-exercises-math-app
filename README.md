@@ -1,7 +1,8 @@
 # make-exercises-math demo
-Very simple Application that uses an express Router to serve Examples for make-exercise-math Generator via Path "/make". Uses PDF-Kit as default Rendering Engine to create a PDF-Document that will be delivered on your Browser.
+Very simple Application that uses an express Router to serve Examples for make-exercise-math Generator via Path "/make". 
+Uses the fantastic [PDF-Kit Library by Devon Govett](https://github.com/devongovett/pdfkit) as default Rendering Engine to create a PDF-Document that will be delivered on your Browser.
 
-## Example Usage
+## Example Usage - GET
 
 For a very basic example head over to openshift apps and request [http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make](http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make)  
 
@@ -13,6 +14,22 @@ ExerciseTypes are separated by comma and must be contained in the listed Exercis
 
 The page has a label on top. To change it's text, add the label parameter in your Query like this:
 [http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make?types=multN10N10&label=my%20custom%20label](http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make?types=multN10N10&label=my%20custom%20label)
+
+## Example Usage - POST
+*Please Note, that you can really break things down this way. The Online Demo-Pod might even receive a significant downtime.*
+
+Currently, it is possible to send the usual Exercises Type Definitions to the POST Endpoint and redirect the Response Data to a PDF File.
+Using a Tool like cURL you can send custom Payload to the Endpoint like this:
+```
+curl -d '{"label":"your_Label", "exercises" : ["add_add_"] }' -H "Content-Type: application/json" -X POST http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make > response.pdf
+
+```
+This way it is also possible to send specific Type Definitions via POST:
+```
+curl -d '{"label":"your_label", "exercises":[{"quantity":7, "level":1, "operations":["add"],"operands":[{"range":{"min":500,"max":1000}},{"range":{"max":100}}]}]}' -H "Content-Type: application/json" -X POST http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make > response.pdf
+```
+For more Details how to define a custom Exercise of Type Math, see [https://github.com/M3ssman/make-exercises-math](https://github.com/M3ssman/make-exercises-math)
+
 
 ## Installation 
 Clone Repository, checkout current master, run 
