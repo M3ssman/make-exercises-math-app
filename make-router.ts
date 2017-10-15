@@ -44,10 +44,17 @@ export class MakeRouter {
         console.log('POST with '+ req);
         const label = req.body.label || 'Mathematik :: Sienna Metzner, 3c';
         const metaData = prepareMetaData(label);
-        let exercises = mapTypes(req.body.exercises) || req.body.exercises;
-        if(exercises === undefined) {
+        let exercises = [];
+        if(req.body.exercises === undefined) {
             exercises = [defaultAdd];
+        } else {
+            exercises = mapTypes(req.body.exercises);
         }
+        if(exercises.length === 0) {
+            exercises = req.body.exercises;
+        }
+
+        console.log('exercises : '+ JSON.stringify(exercises));
 
         // process exercises
         processExercisesPromise(exercises, metaData, res);
