@@ -31,7 +31,12 @@ class MyApp {
         let router: express.Router = express.Router();
         router.get('/', (req, res, next) => {
             res.json({
-                message: 'Hello World!'
+                message: 'Make Exercises Math using Path /make'
+            });
+        });
+        router.post('/', (req, res, next) => {
+            res.json({
+                message: 'Make Exercises Math using Path /make'
             });
         });
 
