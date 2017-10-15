@@ -42,9 +42,9 @@ export class MakeRouter {
      */
     post(req: express.Request, res: express.Response): void {
         console.log('POST with '+ req);
-        let exercises = req.body.exercises;
         const label = req.body.label || 'Mathematik :: Sienna Metzner, 3c';
         const metaData = prepareMetaData(label);
+        let exercises = mapTypes(req.body.exercises) || req.body.exercises;
         if(exercises === undefined) {
             exercises = [defaultAdd];
         }
@@ -75,15 +75,19 @@ function prepareMetaData(label: string): MetaData {
 
 function determineExerciseTypes(types: string): any[] | undefined {
     if (types) {
-        let t = [];
         const typesArray = types.split(',');
-        for (let i = 0; i < typesArray.length; i++) {
-            if (extype[typesArray[i]] !== undefined) {
-                t.push(extype[typesArray[i]]);
-            }
-        }
-        return t;
+        return mapTypes(typesArray);
     }
+}
+
+function mapTypes(types: string[]): any | undefined {
+    let t = [];
+    for (let i = 0; i < types.length; i++) {
+        if (extype[types[i]] !== undefined) {
+            t.push(extype[types[i]]);
+        }
+    }
+    return t;
 }
 
 function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: express.Response) {

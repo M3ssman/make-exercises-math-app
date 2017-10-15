@@ -10,3 +10,6 @@ node_modules
 
 # no debug stuff
 npm-debug.log
+
+# no generated pdf-Files
+*.pdf
