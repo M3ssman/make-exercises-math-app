@@ -28,6 +28,12 @@ This way it is also possible to send specific Type Definitions via POST:
 ```
 curl -d '{"label":"your_label", "exercises":[{"quantity":7, "level":1, "operations":["add"],"operands":[{"range":{"min":500,"max":1000}},{"range":{"max":100}}]}]}' -H "Content-Type: application/json" -X POST http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make > response.pdf
 ```
+Of course you might post a file containing valid JSON to the endpoint and redirect the response stream into a PDF-file or your choice:
+```
+curl -d "@make_02.json" -H "Content-Type: application/json" -X POST http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make > response_os.pdf
+```
+For a valid JSON File see this example [make_02.json](./make_02.json) 
+
 For more Details how to define a custom Exercise of Type Math, see [https://github.com/M3ssman/make-exercises-math](https://github.com/M3ssman/make-exercises-math)
 
 

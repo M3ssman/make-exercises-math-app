@@ -1,0 +1,27 @@
+{"exercises":[
+    { "quantity":12, 
+      "level":1, 
+      "operations":["mult"],
+      "operands":[
+        {"range":{"min":2,"max":20}},
+        {"range":{"min": 3,"max" :3}}
+      ]
+    },
+    { "quantity":12, 
+      "level":1, 
+      "operations":["sub"],
+      "operands":[
+        {"range":{"min":2,"max":20}},
+        {"range":{"min": 5,"max" :5}}
+      ]
+    },
+    { "quantity":12, 
+      "level":1, 
+      "operations":["mult"],
+      "operands":[
+        {"range":{"min":2,"max":20}},
+        {"range":{"min": 8,"max" :8}}
+      ]
+    }
+  ]
+}
