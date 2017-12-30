@@ -10,8 +10,8 @@
     "test": "IP=0.0.0.0 PORT=3030 node_modules/.bin/mocha --timeout 5000 tests/*_test.js"
   },
   "engines": {
-    "node": ">= 6.9.0",
-    "npm": ">= 1.0.0"
+    "node": ">= 8.9.3",
+    "npm": ">= 5.5.1"
   },
   "dependencies": {
     "@types/body-parser": "0.0.33",
