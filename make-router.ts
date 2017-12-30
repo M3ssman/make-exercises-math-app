@@ -122,9 +122,18 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
             doc.text(row, x, y);
             x += 40;
             for (let j = 0; j < exc[i].length; j++) {
-                const excR: string = exc[i][j].get()[0];
-                doc.text(excR, x, y);
-                y += 40;
+                const excR: string[] = exc[i][j].get();
+                if (typeof excR === 'object') {
+                    if(excR.length === 1) {
+                        doc.text(excR[0], x, y);
+                        y += 40;
+                    } else if(excR.length > 1) {
+                        for(let k=0; k < excR.length; k++) {
+                            doc.text(excR[k], x, y);
+                            y += 40;
+                        }
+                    }
+                }
             }
             a++;
             x += 120;
