@@ -22,7 +22,7 @@ The page has a label on top. To change it's text, add the label parameter in you
 [http://localhost/make?types=multN10N10&label=my%20custom%20label](http://localhost/make?types=multN10N10&label=my%20custom%20label)
 
 ## Example Usage - POST
-*Please Note, that you can really break things down this way. Application may even go down. Furthermore, the Guidance requires that you are residing on a *nix Plattform or have a Tool similar to cURL at hand to trigger Web Requests.*
+*Please Note, that you can really break things down this way. Application may even go down. Furthermore, the Guidance requires that you are residing on a \*nix Plattform or have a Tool similar to cURL at hand to trigger Web Requests.*
 
 Currently, it is possible to send Exercises Type Definitions to the POST Web Endpoint and redirect the Response Data to a PDF File.
 Using a Tool like cURL you can send custom Payload to the Endpoint like this:
