@@ -1,16 +1,33 @@
 # make-exercises-math demo
-Very simple Application that uses an express Router to serve Examples for make-exercise-math Generator via Path "/make". 
-Uses the fantastic [PDF-Kit Library by Devon Govett][1] as default Rendering Engine to create a PDF-Document that will be delivered on your Browser.
+Demo Application using [NodeJS Express-Framework][1] to serve Basic mathematical exercixes via URL-Path "\<host\>/make". 
+Uses fantastic [PDF-Kit Library by Devon Govett][2] to render PDF-Documents delivered to your Browser.
 
 ## Installation Local
-Clone Repository, checkout current master, run 
+Clone Repository and run 
 ```
 npm install
 ```
+to install required Libraries.
+
+## Start
+In Root Folder, start app with
+
+```
+npm start
+```
+Open "http://localhost:8080/make" in your favourite Browser to inspect the default exercises.
+
+## Test
+In Root Folder, launch tests:
+
+```
+npm test
+```
+
 
 ## Example Usage - GET
 
-~~For a very basic example head over to openshift apps and request [http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make](http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make)~~
+~~Head over to openshift apps and request [http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make](http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make)~~
 
 Start App local. Open Browser Tab. 
 Add types-Parameter like this, to get a 3-column Worksheet:  
@@ -40,23 +57,8 @@ curl -d "@make_02.json" -H "Content-Type: application/json" -X POST http://local
 ```
 For a valid JSON File see this example [make_02.json](./make_02.json) 
 
-For more Details how to define a custom Exercise of Type Math, see [Online Docs][2].
+For more Details how to define a custom Exercise of Type Math, see [Online Docs][3].
 
-
-## Test
-In Root Folder, execute tests:
-
-```
-npm test
-```
-
-## Start
-In Root Folder, start app with
-
-```
-npm start
-```
-Open a Browser at "localhost:8080/make" to review the generated PDF data.
-
-[1]: https://github.com/devongovett/pdfkit
-[2]: https://github.com/M3ssman/make-exercises-math
+[1]: https://github.com/expressjs/express
+[2]: https://github.com/devongovett/pdfkit
+[3]: https://github.com/M3ssman/make-exercises-math
