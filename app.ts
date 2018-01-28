@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
-import * as makeRoute from './make-router';
+import { MakeRouter } from './make-router';
 debug('ts-express:server');
 
 // Creates and configures an ExpressJS web server.
@@ -41,7 +41,8 @@ class MyApp {
         });
 
         this.express.use('/', router);
-        this.express.use('/make', makeRoute.default);
+        const mr = new MakeRouter();
+        this.express.use('/make', mr.router);
     }
 }
 

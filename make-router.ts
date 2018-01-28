@@ -166,7 +166,3 @@ interface MetaData {
     label: string;
     datum: string;
 }
-
-
-const makeRoute = new MakeRouter();
-export default makeRoute.router;
