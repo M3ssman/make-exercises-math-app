@@ -41,7 +41,6 @@ export class MakeRouter {
      * @param res 
      */
     post(req: express.Request, res: express.Response): void {
-        console.log('POST with '+ req);
         const label = req.body.label || 'Mathematik :: Sienna Metzner, 3c';
         const metaData = prepareMetaData(label);
         let exercises = [];
@@ -115,7 +114,6 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
         let y = 150;
         let x = 40;
         let a = 1;
-        console.log('resolved exercises: ' + JSON.stringify(op));
         const exc: ExerciseMathImpl[][] = op;
         for (let i = 0; i < exc.length; i++) {
             let row = a + ' ) ';
