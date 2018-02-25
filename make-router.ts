@@ -127,13 +127,45 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
                         y += 40;
                     } else if(excR.length > 1) {
                         for(let k=0; k < excR.length; k++) {
-                            doc.text(excR[k], x, y);
+                            let row = excR[k];
+                            if(row.indexOf('_') > -1) {
+                                let _x = x;
+                                console.log('found mask marker! row : ' + row);
+                                for(let l=0; l< row.length; l++) {
+                                    if(row[l] === '_') {
+                                        doc.lineWidth(1);
+                                        doc.rect(_x, y, 7, 10);
+                                        doc.stroke();
+                                    } else {
+                                        doc.text(row[l], _x, y);
+                                    }
+                                    _x += 8.5;
+                                }
+                                _x = 0;
+                            // } else {
+                            //     doc.text(row, x, y);
+                            } else  {
+                                doc.text(row, x, y);
+                            }
+                                
                             // strike line before result entry
                             if(k === excR.length-2) {
                                 const w = excR[k].length * 8.5;
                                 doc.lineWidth(2);
                                 doc.moveTo(x,y+14)
                                 .lineTo(x+w, y+14)
+                                .stroke();
+                                y += 5;
+                            }
+
+                            if(k === excR.length-1) {
+                                const w = excR[k].length * 8.5;
+                                doc.lineWidth(1);
+                                doc.moveTo(x,y+14)
+                                .lineTo(x+w, y+14)
+                                .stroke();
+                                doc.moveTo(x,y+16)
+                                .lineTo(x+w, y+16)
                                 .stroke();
                                 y += 5;
                             }
