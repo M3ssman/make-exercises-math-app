@@ -19,7 +19,7 @@ export class MakeRouter {
      * @param res 
      */
     get(req: express.Request, res: express.Response): void {
-        console.log('GET with '+ req);
+        console.log('GET with req.query: '+JSON.stringify(req.query));
         // prepare metadata from query
         const label = req.query.label || 'Mathematik :: Sienna Metzner, 3c';
         const metaData = prepareMetaData(label);
@@ -52,8 +52,6 @@ export class MakeRouter {
         if(exercises.length === 0) {
             exercises = req.body.exercises;
         }
-
-        console.log('exercises : '+ JSON.stringify(exercises));
 
         // process exercises
         processExercisesPromise(exercises, metaData, res);
@@ -130,20 +128,16 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
                             let row = excR[k];
                             if(row.indexOf('_') > -1) {
                                 let _x = x;
-                                console.log('found mask marker! row : ' + row);
                                 for(let l=0; l< row.length; l++) {
                                     if(row[l] === '_') {
                                         doc.lineWidth(1);
-                                        doc.rect(_x, y, 7, 10);
-                                        doc.stroke();
+                                        doc.rect(_x, y, 7, 10).stroke();
                                     } else {
                                         doc.text(row[l], _x, y);
                                     }
                                     _x += 8.5;
                                 }
                                 _x = 0;
-                            // } else {
-                            //     doc.text(row, x, y);
                             } else  {
                                 doc.text(row, x, y);
                             }
@@ -152,21 +146,16 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
                             if(k === excR.length-2) {
                                 const w = excR[k].length * 8.5;
                                 doc.lineWidth(2);
-                                doc.moveTo(x,y+14)
-                                .lineTo(x+w, y+14)
-                                .stroke();
+                                doc.moveTo(x,y+14).lineTo(x+w, y+14).stroke();
                                 y += 5;
                             }
 
+                            // srike twice below every result row
                             if(k === excR.length-1) {
                                 const w = excR[k].length * 8.5;
                                 doc.lineWidth(1);
-                                doc.moveTo(x,y+14)
-                                .lineTo(x+w, y+14)
-                                .stroke();
-                                doc.moveTo(x,y+16)
-                                .lineTo(x+w, y+16)
-                                .stroke();
+                                doc.moveTo(x,y+14).lineTo(x+w, y+14).stroke();
+                                doc.moveTo(x,y+16).lineTo(x+w, y+16).stroke();
                                 y += 5;
                             }
 
