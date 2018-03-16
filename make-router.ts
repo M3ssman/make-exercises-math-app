@@ -26,7 +26,7 @@ export class MakeRouter {
 
         // inspespect exercises query parameter
         const parameters = req.query;
-        const types = determineExerciseTypes(parameters.types);
+        const types = getExerciseTypes(parameters.types);
         const exerciseTypes = types || [defaultAdd];
 
         // process exercises
@@ -47,7 +47,7 @@ export class MakeRouter {
         if(req.body.exercises === undefined) {
             exercises = [defaultAdd];
         } else {
-            exercises = mapTypes(req.body.exercises);
+            exercises = getExerciseTypes(req.body.exercises);
         }
         if(exercises.length === 0) {
             exercises = req.body.exercises;
@@ -77,23 +77,21 @@ function prepareMetaData(label: string): MetaData {
     return { datum: datum, label: label };
 }
 
-function determineExerciseTypes(types: string): any[] | undefined {
+function getExerciseTypes(types: string): any[] | undefined {
     if (types) {
         const typesArray = types.split(',');
-        return mapTypes(typesArray);
+        return typesArray.filter( type => extype[type] !== undefined).map( t => extype[t]);
     }
 }
 
-function mapTypes(types: string[]): any | undefined {
-    let t = [];
-    for (let i = 0; i < types.length; i++) {
-        if (extype[types[i]] !== undefined) {
-            t.push(extype[types[i]]);
-        }
-    }
-    return t;
-}
-
+/**
+ * 
+ * Rendering Demo Application with Exercises
+ * 
+ * @param exerciseTypes 
+ * @param metaData 
+ * @param res 
+ */
 function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: express.Response) {
     // request exercises
     makeSet(exerciseTypes).then(op => {
@@ -123,12 +121,15 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
                     if(excR.length === 1) {
                         doc.text(excR[0], x, y);
                         y += 40;
+                    // having at least an additional carry row ...
                     } else if(excR.length > 1) {
                         for(let k=0; k < excR.length; k++) {
                             let row = excR[k];
+                            // check row for marks of former digits <> 0
                             if(row.indexOf('_') > -1) {
                                 let _x = x;
                                 for(let l=0; l< row.length; l++) {
+                                    // replace underscore mark by rectangle
                                     if(row[l] === '_') {
                                         doc.lineWidth(1);
                                         doc.rect(_x, y, 7, 10).stroke();
@@ -139,6 +140,7 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
                                 }
                                 _x = 0;
                             } else  {
+                                // no marks, just render line as it is
                                 doc.text(row, x, y);
                             }
                                 
