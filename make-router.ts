@@ -97,7 +97,7 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
     makeSet(exerciseTypes).then(op => {
         // prepare pdf doc
         let doc = new PDFDocument({ 'size': [600, 840] });
-        doc.font('Courier-Bold', 'Courier', 14);
+        doc.font('Courier-Bold', 'Courier', 16);
         if (metaData) {
             if (metaData.label) {
                 doc.text(metaData.label);
@@ -132,11 +132,11 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
                                     // replace underscore mark by rectangle
                                     if(row[l] === '_') {
                                         doc.lineWidth(1);
-                                        doc.rect(_x, y, 7, 10).stroke();
+                                        doc.rect(_x, y, 8, 12).stroke();
                                     } else {
                                         doc.text(row[l], _x, y);
                                     }
-                                    _x += 8.5;
+                                    _x += 10;
                                 }
                                 _x = 0;
                             } else  {
@@ -146,7 +146,7 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
                                 
                             // strike line before result entry
                             if(k === excR.length-2) {
-                                const w = excR[k].length * 8.5;
+                                const w = excR[k].length * 10;
                                 doc.lineWidth(2);
                                 doc.moveTo(x,y+14).lineTo(x+w, y+14).stroke();
                                 y += 5;
@@ -154,7 +154,7 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
 
                             // srike twice below every result row
                             if(k === excR.length-1) {
-                                const w = excR[k].length * 8.5;
+                                const w = excR[k].length * 10;
                                 doc.lineWidth(1);
                                 doc.moveTo(x,y+14).lineTo(x+w, y+14).stroke();
                                 doc.moveTo(x,y+16).lineTo(x+w, y+16).stroke();
