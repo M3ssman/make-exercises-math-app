@@ -1,10 +1,19 @@
 import * as express from 'express';
-import * as  PDFDocument from 'pdfkit';
+import * as PDFDocument from 'pdfkit';
 import * as moment from 'moment';
 
-import { makeSet, defaultAdd } from 'make-exercises-math';
+import { 
+    makeSet, 
+    defaultAdd 
+} from 'make-exercises-math';
 import * as extype from 'make-exercises-math';
-import { ExerciseMathImpl, ExpressionImpl, ExpressionRender } from 'make-exercises-math';
+import { 
+    ExerciseMath,
+    ExerciseMathImpl, 
+    ExtensionType,
+    ExtensionExpression,
+    add_add_,
+} from 'make-exercises-math';
 
 
 export class MakeRouter {
@@ -110,7 +119,7 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
         let y = 150;
         let x = 40;
         let a = 1;
-        const exc: ExerciseMathImpl[][] = op;
+        const exc: ExerciseMath[][] = op;
         for (let i = 0; i < exc.length; i++) {
             let row = a + ' ) ';
             doc.text(row, x, y);
