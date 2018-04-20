@@ -179,7 +179,12 @@ function processExercisesPromise(exerciseTypes: any[], metaData: MetaData, res: 
                 }
             }
             a++;
-            x += 120;
+            // if the last entry from last row was division ...
+            if(exc[i][0] && exc[i][0].extensions[0] && exc[i][0].extensions[0].extensionType == ExtensionType.DIV) {
+                x += 200;
+            } else {
+                x += 120;
+            }
             y = 150;
         }
         doc.pipe(res);
