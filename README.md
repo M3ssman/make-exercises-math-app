@@ -27,7 +27,7 @@ npm test
 
 ## Example Usage - GET
 
-~~Head over to openshiftapps.com and request [http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make](http://make-exercises-math-app-make-exercises-math-app.a3c1.starter-us-west-1.openshiftapps.com/make)~~ Currently, the Demo-App seems to be Online again, so you can explore the API right over there. As Fallback, clone this Repository and lift-off as described in the previous section.
+*An Online-Demo can be accessed from [https://manage.openshift.com/](OpenShift) at (http://make-exercises-math-app-make-exercises-math-app.7e14.starter-us-west-2.openshiftapps.com/make). Unfortunately, it's not always working. Due Downtimes, clone this Repository and lift-off as described in the previous section. The Request Parameters and Payloads apply locally as well as for the Online Demo Host, too.*
 
 Start App local. Open Browser Tab. 
 Add types-Parameter like this, to get a 3-column Worksheet:  
