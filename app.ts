@@ -2,10 +2,8 @@ import * as http from 'http';
 import * as debug from 'debug';
 import * as path from 'path';
 import * as express from 'express';
-import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import { MakeRouter } from './make-router';
-debug('ts-express:server');
 
 // Creates and configures an ExpressJS web server.
 class MyApp {
@@ -22,7 +20,6 @@ class MyApp {
 
     // Configure Express middleware.
     private middleware(): void {
-        this.express.use(logger('dev'));
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({ extended: false }));
     }
@@ -90,5 +87,4 @@ function onError(error: NodeJS.ErrnoException): void {
 function onListening(): void {
     let addr = server.address();
     let bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
-    debug(`Listening on ${bind}`);
 }

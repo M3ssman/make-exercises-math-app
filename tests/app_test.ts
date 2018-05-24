@@ -4,7 +4,6 @@ import * as chai from 'chai';
 import chaiHTTP = require('chai-http');
 
 const should = chai.should();
-const expect = chai.expect;
 chai.use(chaiHTTP);
 const reqServer = process.env.HTTP_TEST_SERVER || server;
 
