@@ -12,7 +12,7 @@ describe('Basic routes tests', () => {
         chai.request(reqServer).get('/').then(res => {
             res.should.have.status(200);
             done();
-        }, err => { });
+        }, err => console.log(err));
     });
 
     it('GET to /make should return 200', (done) => {
@@ -31,11 +31,14 @@ describe('Basic routes tests', () => {
             }, err => console.log(err));
     });
 
-    it('GET second call to /make should also return 200', (done) => {
-        chai.request(reqServer).get('/make?types=addN50N25Nof10')
-            .then(res => {
-                res.should.have.status(200);
-                done();
-            }, err => console.log(err));
+    it('GET /make?types=addN50N25Nof10 return 200', async () => {
+        const result = await chai.request(reqServer).get('/make?types=addN50N25Nof10');
+        result.should.have.status(200);
+    });
+
+    it('GET /make?types=div_even return 200', async () => {
+        const result = await chai.request(reqServer).get('/make?types=div_even');
+        result.should.have.status(200);
+        console.log('examime result div_even' + JSON.stringify(result));
     });
 });
