@@ -23,6 +23,7 @@
     "@types/pdfkit": "^0.7.33",
     "body-parser": "^1.16.0",
     "express": "^4.16.3",
+    "make-exercises-math": "^0.8.5",
     "moment": "^2.17.1",
     "pdfkit": "^0.8.3",
     "typescript": "^2.9.2"
