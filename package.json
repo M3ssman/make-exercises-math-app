@@ -25,13 +25,13 @@
     "express": "^4.16.3",
     "make-exercises-math": "^0.8.5",
     "moment": "^2.17.1",
-    "pdfkit": "^0.8.3"
+    "pdfkit": "^0.8.3",
+    "typescript": "^2.9.2"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
-    "mocha": "^5.2.0",
-    "typescript": "^2.5.3"
+    "mocha": "^5.2.0"
   },
   "bundleDependencies": [],
   "private": true,
