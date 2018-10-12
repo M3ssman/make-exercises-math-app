@@ -9,7 +9,8 @@ import {
     makeSet, 
     Exercise,
     ExerciseSet,
-    Options
+    Options,
+    Rendered
 } from 'make-exercises-math';
 //} from '../make-exercises-math';
 
@@ -121,60 +122,19 @@ function renderExercisesPDF(sets: ExerciseSet[],metaData: MetaData, res: express
     let a = 1;
 
     sets.forEach((set: ExerciseSet) => {
-        console.log('### EXERCISES of ' + JSON.stringify(set));
         let row = a + ' ) ';
         doc.text(row, x, y);
         x += 40;
         set.exercises.forEach((exc: Exercise) => {    
-            const rendereRows: string[] = exc.rendered;
-            if (typeof rendereRows === 'object') {
-                if(rendereRows.length === 1) {
-                    doc.text(rendereRows[0], x, y);
+            const rendered: Rendered[] = exc.rendered;
+            if (typeof rendered === 'object') {
+                if(rendered.length === 1) {
+                    doc.text(rendered[0].rendered, x, y);
                     y += 40;
                 // having at least an additional carry row ...
-                } else if(rendereRows.length > 1) {
-                    for(let k=0; k < rendereRows.length; k++) {
-                        let row = rendereRows[k];
-                        // check row for marks of former digits <> 0
-                        if(row.indexOf('?') > -1) {
-                            let _x = x;
-                            for(let l=0; l< row.length; l++) {
-                                // replace underscore mark by rectangle
-                                if(row[l] === '?') {
-                                    doc.lineWidth(1);
-                                    doc.rect(_x, y, 8, 12).stroke();
-                                } else {
-                                    doc.text(row[l], _x, y);
-                                }
-                                _x += 10;
-                            }
-                            _x = 0;
-                        } else  {
-                            // no marks, just render line as it is
-                            doc.text(row, x, y);
-                        }
-                            
-                        // strike line before result entry
-                        if(k === rendereRows.length-2) {
-                            const w = rendereRows[k].length * 10;
-                            doc.lineWidth(2);
-                            doc.moveTo(x,y+14).lineTo(x+w, y+14).stroke();
-                            y += 5;
-                        }
-
-                        // srike twice below every result row
-                        if(k === rendereRows.length-1) {
-                            const w = rendereRows[k].length * 10;
-                            doc.lineWidth(1);
-                            doc.moveTo(x,y+14).lineTo(x+w, y+14).stroke();
-                            doc.moveTo(x,y+16).lineTo(x+w, y+16).stroke();
-                            y += 5;
-                        }
-
-                        // next row
-                        y += 15;
-                    }
-                    // between each exercise
+                } else if(rendered.length > 1) {
+                    y = handleRendered(rendered, x, doc, y);
+                    // guess some space between each exercise
                     y += 15;
                 }
             }
@@ -199,3 +159,52 @@ interface MetaData {
     label: string;
     datum: string;
 }
+
+function handleRendered(rendered: extype.Rendered[], x: number, doc: PDFKit.PDFDocument, y: number) {
+    for (let k = 0; k < rendered.length; k++) {
+        let row:Rendered = rendered[k];
+        if(! row) {
+            console.log('[ERROR] entry '+k+': encountered row of type "undefined" from rendered '+JSON.stringify(rendered)+'!')
+            continue;
+        }
+        // check row for marks of former digits <> 0
+        if (row.rendered.indexOf('?') > -1) {
+            let _x = x;
+            for (let l = 0; l < row.rendered.length; l++) {
+                // replace underscore mark by rectangle
+                if (row.rendered[l] === '?') {
+                    doc.lineWidth(1);
+                    doc.rect(_x, y, 8, 12).stroke();
+                }
+                else {
+                    doc.text(row.rendered[l], _x, y);
+                }
+                _x += 10;
+            }
+            _x = 0;
+        }
+        else {
+            // no marks, just render line as it is
+            doc.text(row.rendered, x, y);
+        }
+        // strike line before result entry
+        if (k === rendered.length - 2) {
+            const w = rendered[k].rendered.length * 10;
+            doc.lineWidth(2);
+            doc.moveTo(x, y + 14).lineTo(x + w, y + 14).stroke();
+            y += 5;
+        }
+        // srike twice below every result row
+        if (k === rendered.length - 1) {
+            const w = rendered[k].rendered.length * 10;
+            doc.lineWidth(1);
+            doc.moveTo(x, y + 14).lineTo(x + w, y + 14).stroke();
+            doc.moveTo(x, y + 16).lineTo(x + w, y + 16).stroke();
+            y += 5;
+        }
+        // next row
+        y += 15;
+    }
+    return y;
+}
+
