@@ -3,16 +3,16 @@ import * as PDFDocument from 'pdfkit';
 import * as moment from 'moment';
 
 import * as extype
-    // from 'make-exercises-math';
-    from '../make-exercises-math';
+    from 'make-exercises-math';
+    // from '../make-exercises-math';
 import {
     makeSet,
     Exercise,
     ExerciseSet,
     Options,
     Rendered
-    // } from 'make-exercises-math';
-} from '../make-exercises-math';
+} from 'make-exercises-math';
+// } from '../make-exercises-math';
 
 // some fallback
 const defaultAdd: Options = {
