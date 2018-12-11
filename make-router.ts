@@ -3,7 +3,7 @@ import * as express from 'express';
 import {
     makeExercisePDF,
     PageOptions,
-} from '../make-exercises-math';
+} from 'make-exercises-math';
 
 export class MakeRouter {
 
