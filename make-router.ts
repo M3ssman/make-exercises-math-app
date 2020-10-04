@@ -19,7 +19,8 @@ export class MakeRouter {
     get(req: express.Request, res: express.Response): void {
         const parameters = req.query;
         const configs = parameters.types
-        processExercisesPromise(configs, { pageLabel: req.query.label }, res)
+        const label = req.query.label as string
+        processExercisesPromise(configs, { pageLabel: label }, res)
     }
 
     /**
@@ -31,7 +32,8 @@ export class MakeRouter {
      */
     post(req: express.Request, res: express.Response): void {
         const exercises = req.body.exercises
-        processExercisesPromise(exercises, { pageLabel: req.query.label }, res);
+        const label = req.query.label as string
+        processExercisesPromise(exercises, { pageLabel: label }, res);
     }
 
     /**
@@ -56,7 +58,7 @@ export class MakeRouter {
  * @param pageOpts 
  * @param res 
  */
-function processExercisesPromise(exerciseTypes: string, pageOpts: PageOptions, res: express.Response) {
+function processExercisesPromise(exerciseTypes: any, pageOpts: PageOptions, res: express.Response) {
     console.debug('[DEBUG] - request exercises from "' + JSON.stringify(exerciseTypes) + '" and pageOptions: ' + JSON.stringify(pageOpts))
     makeExercisePDF(res, exerciseTypes, pageOpts)
         .then(() => console.log('[INFO] received Exercises: done'), 
