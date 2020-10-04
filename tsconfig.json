@@ -8,6 +8,6 @@
     "files": [
         "./app.ts",
         "./make-router.ts",
-        "./tests/app_test.ts"
+        "test/app_test.ts"
     ]
 }
