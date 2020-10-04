@@ -7,24 +7,23 @@
     "prestart": "node_modules/.bin/tsc -p .",
     "start": "node app.js",
     "pretest": "node_modules/.bin/tsc -p .",
-    "test": "IP=0.0.0.0 PORT=3030 node_modules/.bin/mocha --timeout 5000 tests/*_test.js"
+    "test": "IP=0.0.0.0 PORT=3030 node_modules/.bin/mocha --timeout 5000 test/*_test.js"
   },
   "engines": {
     "node": ">= 8.11.0",
     "npm": ">= 5.6.0"
   },
   "dependencies": {
-    "@types/body-parser": "0.0.33",
-    "@types/chai": "^4.0.4",
-    "@types/chai-http": "^3.0.3",
+    "@types/body-parser": "^1.19.0",
+    "@types/chai": "^4.2.0",
     "@types/express": "^4.17.0",
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^8.0.0",
+    "@types/mocha": "^8.0.0",
+    "@types/node": "^14.0.0",
     "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "make-exercises-math": "^1.0.3",
+    "express": "^4.17.0",
+    "make-exercises-math": "^1.0.0",
     "moment": "^2.24.0",
-    "typescript": "^2.9.2"
+    "typescript": "^4.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
